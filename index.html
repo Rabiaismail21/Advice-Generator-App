@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  
+  <title>Frontend Mentor | Advice generator app</title>
+</head>
+<body>
+
+  <div class="advice__card">
+      <h3 class="advice-num">ADVICE <span class="advice-slip-num">#01</span></h3>
+      <p class="advice-text">
+        Unlock Wisdom, Embrace Change: Your Random Advice Generator
+      </p>
+      <picture>
+        <source media="(min-width:1120px)" srcset="images/pattern-divider-desktop.svg">
+        <img src="images/pattern-divider-mobile.svg" style="width:auto;">
+      </picture>
+
+      <button class="advice__generate__btn">
+        <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M20 0H4a4.005 4.005 0 0 0-4 4v16a4.005 4.005 0 0 0 4 4h16a4.005 4.005 0 0 0 4-4V4a4.005 4.005 0 0 0-4-4ZM7.5 18a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3Zm0-9a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3Zm4.5 4.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0
+           3Zm4.5 4.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3Zm0-9a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3Z" fill="#202733"/></svg>
+      </button>
+  </div>
+  <div class="attribution">
+    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
+    Coded by <a href="https://www.linkedin.com/in/rabia-ismail-frontend-developer/" target="_blank">Rabia Ismail</a>.
+  </div>
+
+  <script>
+    // get html elements
+    let adviceGenerateBtn = document.querySelector('.advice__generate__btn');
+    let adviceSlipNum = document.querySelector('.advice-slip-num');
+    let adviceText = document.querySelector('.advice-text');
+
+    // fetching api url
+    async function GenerateRandomAdvice(){
+      let url = 'https://api.adviceslip.com/advice';
+      let response = await fetch(url);
+      let data = await response.json();
+      adviceText.innerText = data.slip.advice;
+      adviceSlipNum.innerText = `#${data.slip.id}`;
+    }
+
+    // function call
+    adviceGenerateBtn.addEventListener('click', GenerateRandomAdvice);
+  </script>
+</body>
+</html>
